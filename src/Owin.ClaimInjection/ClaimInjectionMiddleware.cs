@@ -21,9 +21,10 @@
         {
             var query = context.Request.QueryString.Value;
 
-            if (context.Request.User == null)
+            // TODO: Extract out user Id from query string
+            if (query.Contains("LocalUser"))
             {
-                if (query.Contains("?LocalUser"))
+                if (!context.Request.User.Identity.IsAuthenticated)
                 {
                     // TODO: Find the user from list and inject into context.
 
@@ -34,8 +35,6 @@
                     identity.AddClaim(new Claim("email", "admin@example.com"));
                 }
             }
-
-            // TODO: Perform sign out.
 
             await Next.Invoke(context);
         }

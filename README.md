@@ -21,7 +21,7 @@ else
 
 ```
 
-To trigger local authentication, navigate to the site with following query string.
+To trigger local authentication from test code, navigate to the site with following query string.
 
 ``` csharp
 http://sitename.example.com/?user=internaluser@example.com

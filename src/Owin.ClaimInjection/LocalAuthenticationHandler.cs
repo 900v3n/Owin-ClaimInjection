@@ -12,7 +12,7 @@
     {
         protected override Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
-            var userEmail = Request.Query.Get("email");
+            var userEmail = Request.Query.Get("user");
 
             var user = Options.Users.FirstOrDefault(x => x.Email == userEmail);
 

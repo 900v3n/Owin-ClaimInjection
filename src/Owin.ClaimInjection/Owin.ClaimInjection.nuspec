@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Owin.ClaimInjection</id>
+    <version>1.0.0</version>
+    <authors>900v3n</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>Initial release</releaseNotes>
+    <description>Provides fake authentication mechanism.</description>
+    <references>
+      <group targetFramework="net461">
+        <reference file="Owin.ClaimInjection.dll" />
+      </group>
+    </references>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="11.0.2" />
+      <dependency id="Owin" version="1.0.0" />
+      <dependency id="Microsoft.Owin" version="4.0.0" />
+      <dependency id="Microsoft.Owin.Security" version="4.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Debug\Owin.ClaimInjection.dll" target="lib\net461\Owin.ClaimInjection.dll" />
+  </files>
+</package>

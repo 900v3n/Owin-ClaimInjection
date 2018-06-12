@@ -1,42 +1,28 @@
 ﻿namespace Owin.ClaimInjection
 {
-    using System.Collections.Generic;
-    using System.Security.Claims;
-    using System.Security.Principal;
-    using System.Threading.Tasks;
     using Microsoft.Owin;
-    using Owin.ClaimInjection.Model;
+    using Microsoft.Owin.Security.DataHandler;
+    using Microsoft.Owin.Security.DataProtection;
+    using Microsoft.Owin.Security.Infrastructure;
 
-    public sealed class ClaimInjectionMiddleware : OwinMiddleware
+    public sealed class ClaimInjectionMiddleware : AuthenticationMiddleware<LocalAuthenticationOptions>
     {
-        private readonly IList<User> users;
-
-        public ClaimInjectionMiddleware(OwinMiddleware next, IList<User> users)
-            : base (next)
+        public ClaimInjectionMiddleware(OwinMiddleware next, IAppBuilder appBuilder, LocalAuthenticationOptions options) 
+            : base(next, options)
         {
-            this.users = users;
+            if (options.StateDataFormat == null)
+            {
+                var dataProtector = appBuilder.CreateDataProtector(
+                    typeof(ClaimInjectionMiddleware).FullName,
+                    options.AuthenticationType);
+
+                options.StateDataFormat = new PropertiesDataFormat(dataProtector);
+            }
         }
 
-        public override async Task Invoke(IOwinContext context)
+        protected override AuthenticationHandler<LocalAuthenticationOptions> CreateHandler()
         {
-            var query = context.Request.QueryString.Value;
-
-            // TODO: Extract out user Id from query string
-            if (query.Contains("LocalUser"))
-            {
-                if (!context.Request.User.Identity.IsAuthenticated)
-                {
-                    // TODO: Find the user from list and inject into context.
-
-                    context.Request.User = new GenericPrincipal(new GenericIdentity("Admin User"), null);
-
-                    var identity = context.Request.User.Identity as ClaimsIdentity;
-                    identity.AddClaim(new Claim("role", "Administrator"));
-                    identity.AddClaim(new Claim("email", "admin@example.com"));
-                }
-            }
-
-            await Next.Invoke(context);
+            return new LocalAuthenticationHandler();
         }
     }
 }

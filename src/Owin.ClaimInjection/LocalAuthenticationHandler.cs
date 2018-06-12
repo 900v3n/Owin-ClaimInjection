@@ -83,6 +83,7 @@
         private static ClaimsIdentity ToClaimIdentity(User user)
         {
             var identity = new ClaimsIdentity("LocalAuthentication");
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.NameIdentifier, null));
             identity.AddClaim(new Claim(ClaimTypes.Name, user.Name, null));
             identity.AddClaim(new Claim(ClaimTypes.Role, user.Role, null));
             identity.AddClaim(new Claim(ClaimTypes.Email, user.Email, null));
@@ -93,6 +94,7 @@
         private static ClaimsIdentity GetDefaultIdentity()
         {
             var identity = new ClaimsIdentity("LocalAuthentication");
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, "001", null));
             identity.AddClaim(new Claim(ClaimTypes.Name, "DefaultUser", null));
             identity.AddClaim(new Claim(ClaimTypes.Role, "InternalUser", null));
             identity.AddClaim(new Claim(ClaimTypes.Email, "test@example.com", null));

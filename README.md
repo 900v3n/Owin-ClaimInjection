@@ -16,9 +16,9 @@ if(runOnLocal == true)
 
     var users = new List<ClaimInjection.Model.User>
     {
-        new ClaimInjection.Model.User { Name = "Master Admin", Email = "masteradmin@example.com", Group = GroupType.MasterAdministrator },
-        new ClaimInjection.Model.User { Name = "Administrator", Email = "administrator@example.com", Group = GroupType.Administrator },
-        new ClaimInjection.Model.User { Name = "Internal User", Email = "internaluser@example.com", Group = GroupType.InternalUser }
+        new User { Name = "Master Admin", Email = "masteradmin@example.com", Group = GroupType.MasterAdministrator },
+        new User { Name = "Administrator", Email = "administrator@example.com", Group = GroupType.Administrator },
+        new User { Name = "Internal User", Email = "internaluser@example.com", Group = GroupType.InternalUser }
     };
 
     app.UseLocalAuthentication(roleMappings, users);

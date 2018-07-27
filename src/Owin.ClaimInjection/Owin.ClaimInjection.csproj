@@ -54,8 +54,7 @@
   <ItemGroup>
     <Compile Include="ClaimInjectionMiddleware.cs" />
     <Compile Include="ClaimInjectorExtensions.cs" />
-    <Compile Include="LocalAuthenticationHandler.cs" />
-    <Compile Include="LocalAuthenticationOptions.cs" />
+    <Compile Include="GroupType.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,12 +7,21 @@ Refer to the sample below to register local authentication module in the pipelin
 ``` csharp
 if(runOnLocal == true)
 {
-    // Create local users.
-    var users = new List<User>(){
-        new User{ Name = "Internal User", Role = "InternalUser", Email = "internaluser@example.com" }
+    var roleMappings = new Dictionary<GroupType, string>()
+    {
+        { GroupType.MasterAdministrator, "0f0c15cd-5c79-4726-866f-df23b43aa0c0" },
+        { GroupType.Administrator, "d23900ca-8073-4edf-8ae7-d76fd95fae17" },
+        { GroupType.InternalUser, "3dd1671c-cf5b-406a-8e62-f35578bfe500" }
     };
 
-    app.UseLocalAuthentication(new LocalAuthenticationOptions(users))
+    var users = new List<ClaimInjection.Model.User>
+    {
+        new ClaimInjection.Model.User { Name = "Master Admin", Email = "masteradmin@example.com", Group = GroupType.MasterAdministrator },
+        new ClaimInjection.Model.User { Name = "Administrator", Email = "administrator@example.com", Group = GroupType.Administrator },
+        new ClaimInjection.Model.User { Name = "Internal User", Email = "internaluser@example.com", Group = GroupType.InternalUser }
+    };
+
+    app.UseLocalAuthentication(roleMappings, users);
 }
 else
 {

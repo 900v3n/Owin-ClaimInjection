@@ -32,7 +32,7 @@
                 defaultIdentity = GetDefaultIdentity();
             }
 
-            var userEmail = context.Request.Query.Get("user");
+            var userEmail = context.Request.Query.Get("portalUser");
 
             if (!string.IsNullOrWhiteSpace(userEmail))
             {

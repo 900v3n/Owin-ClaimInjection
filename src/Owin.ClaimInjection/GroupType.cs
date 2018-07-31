@@ -6,6 +6,10 @@
 
         Administrator,
 
-        InternalUser
+        InternalUser,
+
+        Customer,
+
+        Unknown
     }
 }
